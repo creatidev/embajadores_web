@@ -4,6 +4,7 @@
  * @var $username
  */
 ?>
+<?php //phpinfo(); ?>
 <legend><?= h($username['usu_nombre'].' '.$username['usu_apellidos']) ?></legend>
 <div class="row">
     <aside class="column">

@@ -63,7 +63,7 @@ class TUsuariosController extends AppController
         $user = $this->TUsuarios->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->TUsuarios->patchEntity($user, $this->request->getData());
-            $newPass = password_hash($this->request->getData('password'), PASSWORD_BCRYPT);
+            $newPass = base64_encode($this->request->getData('password'));
             $user->usu_contrasena = $newPass;
 
             if ($this->TUsuarios->save($user)) {
@@ -151,7 +151,7 @@ class TUsuariosController extends AppController
                 $this->Flash->error('Dirección de correo no registrada. Contacte a un administrator.');
             } else {
                 $this->Authentication->setIdentity($user);
-                if ((password_verify($password, $user->usu_contrasena))) {
+                if (strcmp($password, base64_decode($user->usu_contrasena)) == 0) {
                     if ($user['usu_estado'] == 0){
                         $this->Flash->error('La cuenta se encuentra deshabilitada. Contacte con un administrador o supervisor.');
                     } else {
@@ -230,7 +230,7 @@ class TUsuariosController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $user = $this->TUsuarios->patchEntity($user, $this->request->getData());
-            $newPass = password_hash($this->request->getData('password'), PASSWORD_BCRYPT);
+            $newPass = base64_encode($this->request->getData('password'));
             $user->usu_contrasena = $newPass;
             if ($this->TUsuarios->save($user)) {
                 $this->Flash->success(__('La contraseña ha sido actualizada.'));
@@ -247,7 +247,7 @@ class TUsuariosController extends AppController
         $user = $this->TUsuarios->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->TUsuarios->patchEntity($user, $this->request->getData());
-            $newPass = password_hash($this->request->getData('password'), PASSWORD_BCRYPT);
+            $newPass = base64_encode($this->request->getData('password'));
             $user->usu_contrasena = $newPass;
             $user->id_rol = 4;
             $user->usu_estado = 0;
