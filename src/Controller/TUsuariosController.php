@@ -58,7 +58,7 @@ class TUsuariosController extends AppController
      */
     public function add()
     {
-        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->toList();
+        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->all();
 
         $user = $this->TUsuarios->newEmptyEntity();
         if ($this->request->is('post')) {
@@ -85,7 +85,7 @@ class TUsuariosController extends AppController
      */
     public function edit($id = null)
     {
-        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->toList();
+        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->all();
 
         $user = $this->TUsuarios->get($id, [
             'contain' => [],
@@ -123,7 +123,7 @@ class TUsuariosController extends AppController
     }
 
     public function update($id = null){
-        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->toList();
+        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->all();
 
         $user = $this->TUsuarios->get($id, [
             'contain' => ['tRoles'],
@@ -259,7 +259,7 @@ class TUsuariosController extends AppController
     }
 
     public function register() {
-        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->toList();
+        $roles = $this->fetchTable('tRoles')->find()->select(['id_rol', 'rol_nombre'])->where(['rol_estado'=>1])->all();
 
         $user = $this->TUsuarios->newEmptyEntity();
         if ($this->request->is('post')) {
