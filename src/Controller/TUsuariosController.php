@@ -153,7 +153,7 @@ class TUsuariosController extends AppController
                 $this->Authentication->setIdentity($user);
                 if (hash_equals(sha1($password), $user->usu_contrasena)) {
                     if ($user['usu_estado'] == 0){
-                        $this->Flash->error('La cuenta se encuentra deshabilitada. Contacte con un administrador o supervisor.');
+                        $this->Flash->error('La cuenta se encuentra deshabilitada. Contacte a un administrador o supervisor.');
                     } else {
                         if ($user['id_rol'] > 2) {
                             $this->Flash->error('Su rol no está autorizado para ingresar a esta aplicación.');
@@ -169,24 +169,6 @@ class TUsuariosController extends AppController
                 } else {
                     $this->Flash->error('Contraseña incorrecta.');
                 }
-/*                if (strcmp($password, base64_decode($user->usu_contrasena)) == 0) {
-                    if ($user['usu_estado'] == 0){
-                        $this->Flash->error('La cuenta se encuentra deshabilitada. Contacte con un administrador o supervisor.');
-                    } else {
-                        if ($user['id_rol'] > 2) {
-                            $this->Flash->error('Su rol no está autorizado para ingresar a esta aplicación.');
-                        } else {
-                            $redirect = $this->request->getQuery('redirect', [
-                                'controller' => 'Pages',
-                                'action' => 'home',
-                                'prefix' => false
-                            ]);
-                            return $this->redirect($redirect);
-                        }
-                    }
-                } else {
-                    $this->Flash->error('Contraseña incorrecta.');
-                }*/
             }
         }
     }
@@ -194,7 +176,6 @@ class TUsuariosController extends AppController
     public function logout()
     {
         $result = $this->Authentication->getResult();
-        // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
             $this->Authentication->logout();
             $this->Flash->success(__('Sesión cerrada correctamente.'));
@@ -209,7 +190,7 @@ class TUsuariosController extends AppController
             if(!$user){
                 $this->Flash->error('Dirección electrónica no registrada');
             } else if ($user['usu_estado'] == 0) {
-                $this->Flash->error('La cuenta se encuentra deshabilitada. Contacte con un administrador o supervisor.');
+                $this->Flash->error('La cuenta se encuentra deshabilitada. Contacte a un administrador o supervisor.');
             } else {
                 $this->Flash->success(__("Se ha enviado un correo electrónico a $email con las instrucciones para realizar el cambio de contraseña."));
                 //return $this->redirect(['controller' => 'tUsuarios', 'action' => 'login']);
@@ -241,7 +222,24 @@ class TUsuariosController extends AppController
         }
     }
 
-    public function resetpassword($id) {
+    public function changepassword($id = null) {
+        $user = $this->TUsuarios->get($id, [
+            'contain' => [],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->TUsuarios->patchEntity($user, $this->request->getData());
+            $newPass = sha1($this->request->getData('password'));
+            $user->usu_contrasena = $newPass;
+            if ($this->TUsuarios->save($user)) {
+                $this->Flash->success(__('La contraseña ha sido actualizada.'));
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('La contraseña no ha sido actualizada. Intentelo de nuevo.'));
+        }
+        $this->set(compact('user'));
+    }
+
+    public function resetpassword($id = null) {
         $user = $this->TUsuarios->get($id, [
             'contain' => [],
         ]);
@@ -277,4 +275,6 @@ class TUsuariosController extends AppController
         }
         $this->set(compact('user','roles'));
     }
+
+    public function download() {}
 }

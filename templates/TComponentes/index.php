@@ -38,9 +38,8 @@
                     <td><?= $this->Number->format($tComponente->id_componente) ?></td>
                     <td><?= $tComponente->t_servicio->ser_nombre ?></td>
                     <td><?= h($tComponente->com_nombre) ?></td>
-                    <td><?= h($tComponente->com_estado) ?></td>
+                    <td><?= $tComponente->com_estado ? __('Si') : __('No') ?></td>
                     <td><?= h($tComponente->com_fecha_creacion) ?></td>
-                    <td><?= h($tComponente->com_eliminado) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('Ver'), ['action' => 'view', $tComponente->id_componente]) ?>
                         <?= $this->Html->link(__('Editar'), ['action' => 'edit', $tComponente->id_componente]) ?>

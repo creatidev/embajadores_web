@@ -24,7 +24,7 @@
     </aside>
     <div class="column-responsive column-80">
         <div class="tUsuarios view content">
-            <?= $this->Html->link(__('Cambiar contraseña'), ['action' => 'resetpassword', $user->id_usuario], ['class' => 'button float-right']) ?>
+            <?= $this->Html->link(__('Cambiar contraseña'), ['action' => 'changepassword', $user->id_usuario], ['class' => 'button float-right']) ?>
             <table>
                 <tr>
                     <th><?= __('Nombre') ?></th>

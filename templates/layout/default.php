@@ -44,7 +44,7 @@ $cakeDescription = 'Embajadores';
             <a href="<?= $this->Url->build('/') ?>"><span>Embajadores </span>Claro</a>
         </div>
         <div class="top-nav-links">
-                <?= $this->Html->link("Descargar APP", 'http://www.google.com/') ?>
+                <?= $this->Html->link("Descargar APP", ['controller'=>'tUsuarios','action'=>'download']) ?>
             <?php if ($username) : ?>
                 <?= $this->Html->link("Inicio", ['controller'=>'Pages','action'=>'home']) ?>
                 <?= $this->Html->link("Cuenta", ['controller'=>'tUsuarios','action'=>'view', $username["id_usuario"]]) ?>
