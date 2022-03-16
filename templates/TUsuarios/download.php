@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <th>Versión :</th>
-                <td>2.1.5</td>
+                <td>2.1.6</td>
             </tr>
             <tr>
                 <th>Publicado :</th>
