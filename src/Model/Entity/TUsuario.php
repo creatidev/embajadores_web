@@ -42,6 +42,7 @@ class TUsuario extends Entity
         'usu_contrasena' => true,
         'usu_estado' => true,
         'usu_fecha_creacion' => true,
+        'usu_eliminado' => true,
     ];
 
     protected $_hidden = [

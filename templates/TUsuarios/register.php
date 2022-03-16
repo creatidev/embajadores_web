@@ -18,7 +18,7 @@
                 <?= $this->Form->create($user) ?>
                 <fieldset>
                     <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_mjlh3hcy.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop  autoplay></lottie-player>
-                    <p style="text-align: justify; text-justify: inter-word;"><?= __('A continuación ingrese los datos solicitados. Una vez registrado, contacte a un administrador o supervisor para ser dado de alta.') ?></p>
+                    <p style="text-align: justify; text-justify: inter-word;"><?= __('A continuación ingrese los datos solicitados. Una vez registrado, Un supervisor activará su cuenta y asignará el rol.') ?></p>
                     <br>
                     <?php
                         echo $this->Form->control('usu_dni',['label'=>'Cedula']);

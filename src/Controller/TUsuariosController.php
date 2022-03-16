@@ -26,9 +26,9 @@ class TUsuariosController extends AppController
         if($key){
             $query = $this->TUsuarios->find()->where(['Or'=>[
                 'tUsuarios.usu_nombre LIKE' => "%$key%", 'tUsuarios.usu_email LIKE' => "%$key%"
-            ]]);
+            ]])->where(['tUsuarios.usu_eliminado'=>0]);
         }else{
-            $query = $this->TUsuarios;
+            $query = $this->TUsuarios->find()->where(['tUsuarios.usu_eliminado'=>0]);
         }
         $count = $this->TUsuarios->find()->count();
         $users = $this->paginate($query,['contain'=>['tRoles']]);
@@ -112,14 +112,16 @@ class TUsuariosController extends AppController
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $tUsuario = $this->TUsuarios->get($id);
-        if ($this->TUsuarios->delete($tUsuario)) {
-            $this->Flash->success(__('El registro del usuario ha sido eliminado.'));
-        } else {
-            $this->Flash->error(__('El registro del usuario no pudo ser actualizado. Inténtelo de nuevo.'));
-        }
+        $user = $this->TUsuarios->get($id);
 
-        return $this->redirect(['action' => 'index']);
+        $user->usu_estado = 0;
+        $user->usu_eliminado = 1;
+
+        if ($this->TUsuarios->save($user)) {
+            $this->Flash->success(__('El registro del usuario ha sido eliminado.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('El registro del usuario no pudo ser eliminado. Inténtelo de nuevo.'));
     }
 
     public function update($id = null){
@@ -195,11 +197,11 @@ class TUsuariosController extends AppController
                 $this->Flash->success(__("Se ha enviado un correo electrónico a $email con las instrucciones para realizar el cambio de contraseña."));
                 //return $this->redirect(['controller' => 'tUsuarios', 'action' => 'login']);
 
-                $mailer = new Mailer();
+/*                $mailer = new Mailer();
                 $mailer->setTransport('gmail',[
                     'host' => 'smtp.gmail.com',
                 ]);
-/*                $mailer = new Mailer('default');
+                $mailer = new Mailer('default');
                 $mailer->setTransport('smtp');
                 $mailer->setFrom(['noreply[at]quantic.com.co' => 'myCake4'])
                     ->setTo($email)

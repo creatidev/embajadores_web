@@ -26,7 +26,6 @@
             ) ?>
             <?= $this->Html->link(__('Cancelar...'), ['action' => 'update', $user->id_usuario], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('Lista de...'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-
         </div>
     </aside>
     <div class="column-responsive column-80">

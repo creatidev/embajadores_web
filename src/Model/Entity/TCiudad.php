@@ -29,5 +29,6 @@ class TCiudad extends Entity
         'ciu_nombre' => true,
         'ciu_estado' => true,
         'ciu_fecha_creacion' => true,
+        'ciu_eliminado' => true,
     ];
 }

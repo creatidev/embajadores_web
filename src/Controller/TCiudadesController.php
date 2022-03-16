@@ -101,12 +101,13 @@ class TCiudadesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $tCiudades = $this->TCiudades->get($id);
-        if ($this->TCiudades->delete($tCiudades)) {
-            $this->Flash->success(__('El registro de la ciudad ha sido eliminado.'));
-        } else {
-            $this->Flash->error(__('El registro de la ciudad no pudo ser eliminado, inténtelo de nuevo.'));
-        }
 
-        return $this->redirect(['action' => 'index']);
+        $tCiudades->ciu_eliminado = 1;
+
+        if ($this->TCiudades->save($tCiudades)) {
+            $this->Flash->success(__('El registro de la ciudad ha sido eliminado.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        $this->Flash->error(__('El registro de la ciudad no pudo ser eliminado, inténtelo de nuevo.'));
     }
 }

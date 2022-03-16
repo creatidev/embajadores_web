@@ -118,6 +118,9 @@ class TUsuariosTable extends Table
             ->allowEmptyString('usu_estado');
 
         $validator
+            ->allowEmptyString('usu_eliminado');
+
+        $validator
             ->dateTime('usu_fecha_creacion')
             ->notEmptyDateTime('usu_fecha_creacion');
 

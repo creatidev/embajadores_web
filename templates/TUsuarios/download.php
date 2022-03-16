@@ -12,7 +12,7 @@
             </tr>
             <tr>
                 <th>Versión :</th>
-                <td>2.1.0</td>
+                <td>2.1.5</td>
             </tr>
             <tr>
                 <th>Publicado :</th>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <th>Acción :</th>
-                <td><a href="url">Descargar</a></td>
+                <td><a href="https://pointdesk.asicamericas.com/appclaro.apk">Descargar</a></td>
             </tr>
         </table>
 
