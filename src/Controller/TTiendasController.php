@@ -107,7 +107,8 @@ class TTiendasController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $tTienda = $this->TTiendas->get($id);
-        if ($this->TTiendas->delete($tTienda)) {
+        $tTienda->tie_eliminado = 1;
+        if ($this->TTiendas->save($tTienda)) {
             $this->Flash->success(__('El registro de la tienda ha sido eliminada.'));
         } else {
             $this->Flash->error(__('El registro de la tienda no pudo ser eliminado, inténtelo de nuevo.'));

@@ -94,7 +94,8 @@ class TTiposFallaController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $tTiposFalla = $this->TTiposFalla->get($id);
-        if ($this->TTiposFalla->delete($tTiposFalla)) {
+        $tTiposFalla->tpf_eliminado = 1;
+        if ($this->TTiposFalla->save($tTiposFalla)) {
             $this->Flash->success(__('El registro de tipo de falla, ha sido eliminado.'));
         } else {
             $this->Flash->error(__('El registro de tipo de falla no pudo ser eliminado, inténtelo de nuevo.'));

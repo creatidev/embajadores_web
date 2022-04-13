@@ -101,7 +101,8 @@ class TServiciosController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $tServicio = $this->TServicios->get($id);
-        if ($this->TServicios->delete($tServicio)) {
+        $tServicio->ser_eliminado = 1;
+        if ($this->TServicios->save($tServicio)) {
             $this->Flash->success(__('La servicio registrado ha sido eliminado.'));
         } else {
             $this->Flash->error(__('El servicio registrado no se pudo eliminar. Inténtelo de nuevo.'));

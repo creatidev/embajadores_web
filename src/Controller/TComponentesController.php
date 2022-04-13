@@ -104,7 +104,8 @@ class TComponentesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $tComponente = $this->TComponentes->get($id);
-        if ($this->TComponentes->delete($tComponente)) {
+        $tComponente->com_eliminado = 1;
+        if ($this->TComponentes->save($tComponente)) {
             $this->Flash->success(__('El registro del componente ha sido eliminado.'));
         } else {
             $this->Flash->error(__('El registro del componente no pudo ser eliminado, inténtelo de nuevo.'));

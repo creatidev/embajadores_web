@@ -94,7 +94,8 @@ class TRolesController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $tRole = $this->TRoles->get($id);
-        if ($this->TRoles->delete($tRole)) {
+        $tRole->rol_eliminado = 1;
+        if ($this->TRoles->save($tRole)) {
             $this->Flash->success(__('El rol registrado ha sido eliminado.'));
         } else {
             $this->Flash->error(__('El rol registrado no pudo ser eliminado, inténtelo de nuevo.'));
