@@ -76,8 +76,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     /**
      * Setup the middleware queue your application will use.
      *
-     * @param \Cake\Http\MiddlewareQueue $middlewareQueue The middleware queue to setup.
-     * @return \Cake\Http\MiddlewareQueue The updated middleware queue.
+     * @param MiddlewareQueue $middlewareQueue The middleware queue to setup.
+     * @return MiddlewareQueue The updated middleware queue.
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
@@ -140,17 +140,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         ]);
 
         return $authenticationService;
-    }
-
-    /**
-     * Register application container services.
-     *
-     * @param \Cake\Core\ContainerInterface $container The Container to update.
-     * @return void
-     * @link https://book.cakephp.org/4/en/development/dependency-injection.html#dependency-injection
-     */
-    public function services(ContainerInterface $container): void
-    {
     }
 
     /**
